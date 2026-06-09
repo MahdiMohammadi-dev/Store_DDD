@@ -15,6 +15,10 @@ public class StoreDbContext : DbContext, IUnitOfWork
     {
     }
 
+    protected StoreDbContext()
+    {
+    }
+
     public DbSet<Product> Products => Set<Product>();
 
     public DbSet<Order> Orders => Set<Order>();
