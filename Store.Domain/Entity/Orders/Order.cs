@@ -46,4 +46,18 @@ public class Order
 
         _items.Add(new OrderItem(productId, quantity, unitPrice));
     }
+
+
+    public void Pay()
+    {
+        if (!_items.Any()) throw new OrderException(OrderErrors.EmptyOrder);
+
+        if (Status == OrderStatus.Paid) throw new OrderException(OrderErrors.OrderAlreadyPaid);
+        
+        if (Status == OrderStatus.Cancelled) throw new OrderException(OrderErrors.CancellationStatus);
+
+        Status = OrderStatus.Paid;
+    }
+
+
 }
