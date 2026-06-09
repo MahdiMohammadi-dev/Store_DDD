@@ -1,8 +1,49 @@
-﻿namespace Store.Domain.Entity.Orders;
+﻿using Store.Domain.Enums;
+using Store.Domain.ValueObjects;
+
+namespace Store.Domain.Entity.Orders;
 
 public class Order
 {
- 
+    private readonly List<OrderItem> _items = new List<OrderItem>();
 
-    
+    public Guid Id { get; private set; }
+
+    public Guid CustomerId { get; private set; }
+
+    public OrderStatus Status { get; private set; }
+
+    public IReadOnlyCollection<OrderItem> Items
+        => _items.AsReadOnly();
+
+
+    // Constructor
+    private Order()
+    {
+    }
+
+    public Order(Guid customerId)
+    {
+        Id = Guid.NewGuid();
+
+        CustomerId = customerId;
+
+        Status = OrderStatus.Pending;
+    }
+
+
+    // Behaviors
+
+
+    public void AddItem(Guid productId, int quantity, Money unitPrice)
+    {
+        if (quantity <= 0)
+            throw new OrderException(OrderErrors.InvalidQuantity);
+
+        var item = _items.FirstOrDefault(x => x.ProductId == productId);
+
+        if (item != null) throw new OrderException(OrderErrors.ProductAlreadyExists);
+
+        _items.Add(new OrderItem(productId, quantity, unitPrice));
+    }
 }
