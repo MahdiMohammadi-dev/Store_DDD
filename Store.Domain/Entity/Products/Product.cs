@@ -1,10 +1,12 @@
-﻿namespace Store.Domain.Entity.Products;
+﻿using Store.Domain.ValueObjects;
+
+namespace Store.Domain.Entity.Products;
 
 public class Product
 {
     public Guid Id { get;private set; }
-    public string Name { get; private set; }
-    public decimal Price { get; private set; }
+    public ProductName Name { get; private set; }
+    public Money Price { get; private set; }
     public int Stock { get; private set; }
 
 
@@ -13,19 +15,14 @@ public class Product
     }
 
     // Constructor
-    public Product(Guid id, string name, decimal price, int stock)
+    public Product(ProductName name, int stock,Money price)
     {
+        if (stock < 0)
+            throw new ProductException(ProductErrors.InvalidStock);
 
-        if(string.IsNullOrWhiteSpace(name))
-            throw new Exception("name can not be null");
-
-        if (price < 0 || stock < 0)
-            throw new Exception("price or stock can not less than 0");
-
-        Id = Guid.NewGuid();
         Name = name;
-        Price = price;
         Stock = stock;
+        Price = price;
     }
 
 
@@ -33,17 +30,14 @@ public class Product
 
 
     // Behaviors
-    public void ChangePrice(decimal newPrice)
+    public void ChangePrice(Money newPrice)
     {
-        if (Price < 0)
-            throw new Exception("price can not less than 0");
-
         Price = newPrice;
     }
     public void IncreaseStock(int quantity)
     {
         if (quantity <= 0)
-            throw new Exception("quantity can not less than 0");
+            throw new ProductException(ProductErrors.InvalidStock);
 
         Stock += quantity;
     }
@@ -51,22 +45,16 @@ public class Product
     public void DecreaseStock(int quantity)
     {
         if (quantity <= 0)
-            throw new Exception("quantity can not less than 0");
+            throw new ProductException(ProductErrors.InvalidQuantityValue);
 
         if (Stock < quantity)
-            throw new Exception("Invalid data , stock is less than quantity");
+            throw new ProductException(ProductErrors.InvalidStock);
 
         Stock -= quantity;
     }
 
-    public void ChangeProductName(string newProductName)
+    public void ChangeProductName(ProductName newProductName)
     {
-        if (string.IsNullOrWhiteSpace(newProductName))
-            throw new Exception("product name can not be null");
-        
-        if (newProductName.Length > 40)
-            throw new Exception("product name is too long");
-
         Name = newProductName;
     }
 
