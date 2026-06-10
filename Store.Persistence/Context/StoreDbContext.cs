@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Store.Domain.Entity.Customers;
 using Store.Domain.Entity.Orders;
 using Store.Domain.Entity.Products;
@@ -24,4 +23,5 @@ public class StoreDbContext : DbContext, IUnitOfWork
     public DbSet<Order> Orders => Set<Order>();
 
     public DbSet<Customer> Customers => Set<Customer>();
+
 }
