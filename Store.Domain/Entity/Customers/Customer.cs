@@ -3,7 +3,7 @@ using Store.Domain.ValueObjects;
 
 namespace Store.Domain.Entity.Customers;
 
-public class Customer :BaseEntity
+public class Customer :AggregateRoot
 {
     public Email Email { get; private set; }
 

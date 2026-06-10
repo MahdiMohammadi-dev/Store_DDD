@@ -3,7 +3,7 @@ using Store.Domain.ValueObjects;
 
 namespace Store.Domain.Entity.Products;
 
-public class Product :BaseEntity
+public class Product :AggregateRoot
 {
     public ProductName Name { get; private set; }
     public Money Price { get; private set; }

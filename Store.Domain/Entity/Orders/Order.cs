@@ -4,7 +4,7 @@ using Store.Domain.ValueObjects;
 
 namespace Store.Domain.Entity.Orders;
 
-public class Order :BaseEntity
+public class Order :AggregateRoot
 {
     private readonly List<OrderItem> _items = new List<OrderItem>();
 
