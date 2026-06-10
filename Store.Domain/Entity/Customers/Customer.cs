@@ -14,4 +14,9 @@ public class Customer
         Email = email;
         Address = address;
     }
+
+    public void ChangeAddress(Address address)
+    {
+        Address = address;
+    }
 }
