@@ -1,10 +1,10 @@
-﻿using Store.Domain.ValueObjects;
+﻿using Store.Domain.Abstractions;
+using Store.Domain.ValueObjects;
 
 namespace Store.Domain.Entity.Products;
 
-public class Product
+public class Product :BaseEntity
 {
-    public Guid Id { get;private set; }
     public ProductName Name { get; private set; }
     public Money Price { get; private set; }
     public int Stock { get; private set; }

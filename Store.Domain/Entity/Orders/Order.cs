@@ -1,13 +1,13 @@
-﻿using Store.Domain.Enums;
+﻿using Store.Domain.Abstractions;
+using Store.Domain.Enums;
 using Store.Domain.ValueObjects;
 
 namespace Store.Domain.Entity.Orders;
 
-public class Order
+public class Order :BaseEntity
 {
     private readonly List<OrderItem> _items = new List<OrderItem>();
 
-    public Guid Id { get; private set; }
 
     public Guid CustomerId { get; private set; }
 
