@@ -9,6 +9,7 @@ public class Product
     public Money Price { get; private set; }
     public int Stock { get; private set; }
 
+    public bool IsActive { get; private set; } = true;
 
     private Product()
     {
@@ -58,4 +59,8 @@ public class Product
         Name = newProductName;
     }
 
+    public void DeActiveProduct()
+    {
+        IsActive = false;
+    }
 }
