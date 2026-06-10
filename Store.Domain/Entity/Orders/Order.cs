@@ -59,5 +59,12 @@ public class Order
         Status = OrderStatus.Paid;
     }
 
+    public void Cancel()
+    {
+        if (Status == OrderStatus.Paid)
+            throw new OrderException(OrderErrors.PaidStatus);
+
+        Status = OrderStatus.Cancelled;
+    }
 
 }

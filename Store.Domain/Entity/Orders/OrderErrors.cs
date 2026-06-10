@@ -8,5 +8,6 @@ public static class OrderErrors
     public const string OrderAlreadyPaid = "Order already paid";
 
     public const string EmptyOrder = "Order contains no items";
-    public const string CancellationStatus = "You can not pay because the order is cancelled";
+    public const string CancellationStatus = "You can not pay because the order is cancell";
+    public const string PaidStatus = "You can not Cancell because the order was pay";
 }
