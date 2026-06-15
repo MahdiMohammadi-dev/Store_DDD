@@ -1,12 +1,21 @@
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Store.Application.Behaviors;
 using Store.Application.Products.Commands;
+using Store.Persistence.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+
+
+builder.Services.AddDbContext<StoreDbContext>(option =>
+{
+    option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 
 builder.Services.AddMediatR(typeof(CreateProductCommand).Assembly);
 

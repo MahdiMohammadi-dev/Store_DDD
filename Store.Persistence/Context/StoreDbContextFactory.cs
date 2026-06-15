@@ -14,7 +14,6 @@ public class StoreDbContextFactory : IDesignTimeDbContextFactory<StoreDbContext>
     {
         var optionsBuilder = new DbContextOptionsBuilder<StoreDbContext>();
 
-        // Use a connection string for design-time (e.g., from configuration, environment variable, or hard-coded)
         var connectionString = _configuration.GetConnectionString("DefaultConnection");
         optionsBuilder.UseSqlServer(connectionString);
 

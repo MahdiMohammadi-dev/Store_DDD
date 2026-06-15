@@ -8,13 +8,11 @@ namespace Store.Persistence.Context;
 
 public class StoreDbContext : DbContext, IUnitOfWork
 {
-    public StoreDbContext(
-        DbContextOptions<StoreDbContext> options)
-        : base(options)
+    public StoreDbContext(DbContextOptions<StoreDbContext> options) : base(options)
     {
     }
 
-    protected StoreDbContext()
+    public StoreDbContext()
     {
     }
 

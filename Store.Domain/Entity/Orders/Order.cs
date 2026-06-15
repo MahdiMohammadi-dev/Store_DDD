@@ -1,5 +1,4 @@
 ﻿using Store.Domain.Abstractions;
-using Store.Domain.Entity.Orders.Events;
 using Store.Domain.Enums;
 using Store.Domain.ValueObjects;
 
@@ -58,8 +57,6 @@ public class Order :AggregateRoot
         if (Status == OrderStatus.Cancelled) throw new OrderException(OrderErrors.CancellationStatus);
 
         Status = OrderStatus.Paid;
-
-        RaiseDomainEvent(new OrderPaidDomainEvent(Id));
     }
 
     public void Cancel()

@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Store.Application\Store.Application.csproj" />
+    <ProjectReference Include="..\Store.Persistence\Store.Persistence.csproj" />
   </ItemGroup>
 
 </Project>
