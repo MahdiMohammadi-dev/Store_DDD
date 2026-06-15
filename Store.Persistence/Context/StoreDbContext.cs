@@ -12,14 +12,19 @@ public class StoreDbContext : DbContext, IUnitOfWork
     {
     }
 
-    public StoreDbContext()
-    {
-    }
-
     public DbSet<Product> Products => Set<Product>();
 
     public DbSet<Order> Orders => Set<Order>();
 
     public DbSet<Customer> Customers => Set<Customer>();
+
+    protected override void OnModelCreating(
+        ModelBuilder modelBuilder)
+    {
+        modelBuilder.ApplyConfigurationsFromAssembly(
+            typeof(StoreDbContext).Assembly);
+
+        base.OnModelCreating(modelBuilder);
+    }
 
 }

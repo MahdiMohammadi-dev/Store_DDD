@@ -11,6 +11,7 @@ public class Customer :AggregateRoot
 
     public Customer(Email email, Address address)
     {
+        Id = Guid.NewGuid();
         Email = email;
         Address = address;
     }

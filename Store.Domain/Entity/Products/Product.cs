@@ -21,6 +21,7 @@ public class Product :AggregateRoot
         if (stock < 0)
             throw new ProductException(ProductErrors.InvalidStock);
 
+        Id = Guid.NewGuid();
         Name = name;
         Stock = stock;
         Price = price;

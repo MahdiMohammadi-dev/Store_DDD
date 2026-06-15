@@ -2,7 +2,9 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Store.Application.Behaviors;
 using Store.Application.Products.Commands;
+using Store.Domain.Repositories;
 using Store.Persistence.Context;
+using Store.Persistence.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,14 +21,11 @@ builder.Services.AddDbContext<StoreDbContext>(option =>
 
 builder.Services.AddMediatR(typeof(CreateProductCommand).Assembly);
 
-builder.Services.AddTransient(
-    typeof(IPipelineBehavior<,>),
-    typeof(ValidationBehavior<,>));
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
-builder.Services.AddTransient(
-    typeof(IPipelineBehavior<,>),
-    typeof(LoggingBehavior<,>));
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
 
+builder.Services.AddTransient<IProductRepository, ProductRepository>();
 
 
 
