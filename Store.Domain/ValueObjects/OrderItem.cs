@@ -1,9 +1,8 @@
 ﻿using Store.Domain.Abstractions;
-using Store.Domain.ValueObjects;
 
-namespace Store.Domain.Entity.Orders;
+namespace Store.Domain.ValueObjects;
 
-public class OrderItem :BaseEntity
+public sealed class OrderItem
 {
     public Guid ProductId { get; private set; }
 
