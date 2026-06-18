@@ -9,6 +9,11 @@ public class Customer :AggregateRoot
 
     public Address Address { get; private set; }
 
+
+    private Customer()
+    {
+    }
+
     public Customer(Email email, Address address)
     {
         Id = Guid.NewGuid();

@@ -28,6 +28,11 @@ builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavi
 builder.Services.AddTransient<IProductRepository, ProductRepository>();
 
 
+builder.Services.AddTransient<IUnitOfWork, StoreDbContext>();
+
+builder.Services.AddTransient<IProductRepository, ProductRepository>();
+builder.Services.AddTransient<IOrderRepository, OrderRepository>();
+builder.Services.AddTransient<ICustomerRepository, CustomerRepository>();
 
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
