@@ -1,4 +1,5 @@
 ﻿using Store.Domain.Abstractions;
+using Store.Domain.Entity.Products.Events;
 using Store.Domain.ValueObjects;
 
 namespace Store.Domain.Entity.Products;
@@ -26,7 +27,7 @@ public class Product :AggregateRoot
         Stock = stock;
         Price = price;
 
-        RaiseDomin
+        RaiseDomainEvent(new ProductCreatedDomainEvent(Guid.NewGuid(), Id));
     }
 
 

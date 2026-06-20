@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Store.Domain.Abstractions;
 using Store.Domain.Entity.Customers;
 using Store.Domain.Entity.Orders;
 using Store.Domain.Entity.Products;
@@ -24,6 +25,7 @@ public class StoreDbContext : DbContext, IUnitOfWork
         modelBuilder.ApplyConfigurationsFromAssembly(
             typeof(StoreDbContext).Assembly);
 
+        ChangeTracker.Entries<AggregateRoot>();
         base.OnModelCreating(modelBuilder);
     }
 
