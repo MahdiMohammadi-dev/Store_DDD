@@ -25,6 +25,8 @@ public class Product :AggregateRoot
         Name = name;
         Stock = stock;
         Price = price;
+
+        RaiseDomin
     }
 
 

@@ -1,5 +1,6 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Store.Api.Middlewares;
 using Store.Application.Behaviors;
 using Store.Application.Products.Commands;
 using Store.Domain.Repositories;
@@ -51,5 +52,5 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.UseMiddleware<ExceptionMiddleware>();
 app.Run();
