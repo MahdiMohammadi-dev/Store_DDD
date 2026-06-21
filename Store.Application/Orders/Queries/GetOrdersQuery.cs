@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Store.Application.Orders.Dtos;
 using Store.Domain.Repositories;
 
@@ -15,7 +14,7 @@ public class GetOrdersQueryHandler :IRequestHandler<GetOrdersQuery,List<OrderDto
 
     public async Task<List<OrderDto>> Handle(GetOrdersQuery request, CancellationToken cancellationToken)
     {
-       // return await _context.Orders.Select(x => new OrderDto() {customerId = x.CustomerId}).ToListAsync(cancellationToken);
+   
        return new();
     }
 }
