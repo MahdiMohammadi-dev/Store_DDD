@@ -28,8 +28,9 @@ public sealed class AddOrderItemCommandHandler : IRequestHandler<AddOrderItemCom
         if (order == null || product == null)
             return false;
 
+        product.DecreaseStock(request.Quantity);
         order.AddItem(product.Id, request.Quantity, product.Price);
-
+        
         await _unitOfWork.SaveChangesAsync(cancellationToken);
         return true;
 

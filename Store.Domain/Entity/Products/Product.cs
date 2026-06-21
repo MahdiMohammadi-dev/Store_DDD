@@ -53,7 +53,7 @@ public class Product :AggregateRoot
             throw new ProductException(ProductErrors.InvalidQuantityValue);
 
         if (Stock < quantity)
-            throw new ProductException(ProductErrors.InvalidStock);
+            throw new ProductException(ProductErrors.InsufficientStock);
 
         Stock -= quantity;
     }
