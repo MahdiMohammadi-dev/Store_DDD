@@ -1,15 +1,16 @@
-﻿using System.Text.Json;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Store.Application.Abstractions;
 using Store.Domain.Abstractions;
 using Store.Domain.DomainEvents;
 using Store.Domain.Entity.Customers;
 using Store.Domain.Entity.Orders;
 using Store.Domain.Entity.Products;
 using Store.Domain.Repositories;
+using System.Text.Json;
 
 namespace Store.Persistence.Context;
 
-public class StoreDbContext : DbContext, IUnitOfWork
+public class StoreDbContext : DbContext, IUnitOfWork, IStoreDbContext
 {
     public StoreDbContext(DbContextOptions<StoreDbContext> options) : base(options)
     {
@@ -29,7 +30,6 @@ public class StoreDbContext : DbContext, IUnitOfWork
         modelBuilder.ApplyConfigurationsFromAssembly(
             typeof(StoreDbContext).Assembly);
 
-        ChangeTracker.Entries<AggregateRoot>();
         base.OnModelCreating(modelBuilder);
     }
 
