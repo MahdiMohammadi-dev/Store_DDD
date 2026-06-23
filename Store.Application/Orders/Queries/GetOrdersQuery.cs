@@ -16,17 +16,20 @@ public class GetOrdersQueryHandler : IRequestHandler<GetOrdersQuery, List<OrderD
 
     public async Task<List<OrderDto>> Handle(GetOrdersQuery request, CancellationToken cancellationToken)
     {
-        return await _context.Orders
+        var orders = await _context.Orders
             .AsNoTracking()
-            .Select(x => new OrderDto(
-                x.Id,
-                x.CustomerId,
-                x.Status.ToString(),
-                x.Items.Sum(i => i.UnitPrice.Amount * i.Quantity),
-                x.Items.Select(a =>
-                    new OrderItemDto(a.ProductId,
-                        a.Quantity,
-                        a.UnitPrice.Amount)).ToList()
-            )).ToListAsync(cancellationToken);
+            .Include(o => o.Items)   
+            .ToListAsync(cancellationToken);
+
+        return orders
+            .Select(o => new OrderDto(
+                o.Id,
+                o.CustomerId,
+                o.Status.ToString(),
+                o.Items.Sum(i => i.UnitPrice.Amount * i.Quantity),  
+                o.Items
+                    .Select(i => new OrderItemDto(i.ProductId, i.Quantity, i.UnitPrice.Amount))
+                    .ToList()))
+            .ToList();
     }
 }

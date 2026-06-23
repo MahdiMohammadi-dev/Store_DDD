@@ -2,7 +2,7 @@
 using Store.Domain.Repositories;
 using Store.Domain.ValueObjects;
 
-namespace Store.Application.Customers;
+namespace Store.Application.Customers.Command;
 
 public sealed record ChangeCustomerAddressCommand(Guid CustomerId, string City, string Street, string PostalCode):IRequest<bool>;
 
