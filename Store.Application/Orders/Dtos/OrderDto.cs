@@ -1,6 +1,8 @@
 ﻿namespace Store.Application.Orders.Dtos;
 
-public class OrderDto
-{
-    public Guid customerId { get; set; }
-}
+public sealed record OrderDto(
+    Guid Id,
+    Guid CustomerId,
+    string Status,
+    decimal TotalAmount,
+    List<OrderItemDto> Items);
