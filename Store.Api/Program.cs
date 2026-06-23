@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Store.Api.Middlewares;
+using Store.Application.Abstractions;
 using Store.Application.Behaviors;
 using Store.Application.Products.Commands;
 using Store.Domain.Repositories;
@@ -29,8 +30,11 @@ builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavi
 builder.Services.AddTransient<IProductRepository, ProductRepository>();
 
 
-builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+builder.Services.AddTransient<IUnitOfWork>(
+    provider => provider.GetRequiredService<StoreDbContext>());
 
+builder.Services.AddTransient<IStoreDbContext>(
+    provider => provider.GetRequiredService<StoreDbContext>());
 builder.Services.AddTransient<IProductRepository, ProductRepository>();
 builder.Services.AddTransient<IOrderRepository, OrderRepository>();
 builder.Services.AddTransient<ICustomerRepository, CustomerRepository>();
