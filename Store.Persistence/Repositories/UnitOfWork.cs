@@ -3,7 +3,7 @@ using Store.Persistence.Context;
 
 namespace Store.Persistence.Repositories;
 
-internal sealed class UnitOfWork : IUnitOfWork
+public sealed class UnitOfWork : IUnitOfWork
 {
     private readonly StoreDbContext _dbContext;
 
